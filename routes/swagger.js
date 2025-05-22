@@ -1,0 +1,27 @@
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const express = require("express");
+const router = express.Router();
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Princess API",
+      version: "1.0.0",
+      description: "API documentation for the Princess project"
+    },
+    servers: [
+      {
+        url: "https://cse340-st3g.onrender.com" // our url on render.com (web service)
+      }
+    ]
+  },
+  apis: ["./routes/*.js"] // Read JSDoc from all routes
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+module.exports = router;

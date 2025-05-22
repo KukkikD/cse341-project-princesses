@@ -1,0 +1,36 @@
+//LOCAL Host
+
+### Get all 
+GET http://localhost:8083/princess
+
+### Get Princess by ID
+GET http://localhost:8083/princess/682d9555679e09d3f9c0f8c3
+
+### Add new Princess
+POST http://localhost:8083/princess HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Elsa",
+  "movie": "Frozen",
+  "yearReleased": 2013,
+  "kingdom": "Arendelle",
+  "mainColor": "Blue",
+  "rating": 3
+}
+
+### PUT - Update contact by ID
+PUT http://localhost:8083/princess/682ef2ce4b1fcade62d8e4e3
+Content-Type: application/json
+
+{
+  "name": "Elsa",
+  "movie": "Frozen",
+  "yearReleased": 2013,
+  "kingdom": "Arendelle",
+  "mainColor": "Blue",
+  "rating": 1
+}
+
+### DELETE - Delete a princeese by ID
+DELETE http://localhost:8083/princess/682ef2ce4b1fcade62d8e4e3

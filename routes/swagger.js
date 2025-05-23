@@ -13,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: "https://cse340-st3g.onrender.com" // our url on render.com (web service)
+        url: "https://cse341-project-princesses.onrender.com" // our url on render.com (web service)
       }
     ]
   },

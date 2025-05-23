@@ -7,9 +7,9 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Princess API",
+      title: "Princesses and Castles API",
       version: "1.0.0",
-      description: "API documentation for the Princess project"
+      description: "API documentation for the Princess and Castle project"
     },
     servers: [
       {

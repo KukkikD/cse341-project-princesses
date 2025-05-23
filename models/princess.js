@@ -7,9 +7,12 @@ const princessSchema = new mongoose.Schema({
   yearReleased: { type: Number, required: true },
   kingdom: { type: String },
   mainColor: { type: String },
-  animalFriend: { type: String },
-  quote: { type: String },
-  imageUrl: { type: String },
-});
+  rating: {type: Number, minimum: 1, maximum: 5}, 
+  },
+  {
+    versionKey: false // close __V
+  }
+);
+
 
 module.exports = mongoose.model("Princess", princessSchema, "princesses");

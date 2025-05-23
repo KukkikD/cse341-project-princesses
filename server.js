@@ -6,7 +6,10 @@ const princessRoutes = require("./routes");
 // const swaggerDocument = require('./swagger.json'); // for swagger static
 const swaggerRoutes = require("./routes/swagger"); // for swagger dynamic
 
+const jsonErrorHandler = require("./middleware/jsonErrorHandler");
+
 const app = express();
+
 
 /* Swagger route */
 app.use("/", swaggerRoutes); //swagger dynamic
@@ -14,6 +17,9 @@ app.use("/", swaggerRoutes); //swagger dynamic
 
 /* middleware */
 app.use(bodyParser.json());
+
+/*  catch body parser error */
+app.use(jsonErrorHandler);
 
 /* CORS */
 app.use((req, res, next) => {

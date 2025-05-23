@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const princesstController = require("../controllers/princess");
+const validateCreatePrincess = require("../middleware/validateCreatePrincess");
+const validateUpdatePrincess = require("../middleware/validateUpdatePrincess");
 
 // GET all princesses
 /**
@@ -8,6 +10,7 @@ const princesstController = require("../controllers/princess");
  * /princess:
  *   get:
  *     summary: Get all princesses
+ *     tags: [Princess]
  *     responses:
  *       200:
  *         description: List of princesses retrieved successfully
@@ -20,6 +23,7 @@ router.get("/", princesstController.getAll);
  * /princess/{id}:
  *   get:
  *     summary: Get a princess by ID
+ *     tags: [Princess]
  *     parameters:
  *       - in: path
  *         name: id
@@ -40,6 +44,7 @@ router.get("/:id", princesstController.getSingle);
  * /princess:
  *   post:
  *     summary: Create a new princess
+ *     tags: [Princess]
  *     requestBody:
  *       required: true
  *       content:
@@ -74,14 +79,15 @@ router.get("/:id", princesstController.getSingle);
  *       500:
  *         description: Failed to create Princess
  */
-router.post("/", princesstController.createPrincess);
+router.post("/", validateCreatePrincess, princesstController.createPrincess);
 
-// PUT update a contact
+// PUT update a princess by ID
 /**
  * @swagger
  * /princess/{id}:
  *   put:
  *     summary: Update a princess by ID
+ *     tags: [Princess]
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,14 +121,15 @@ router.post("/", princesstController.createPrincess);
  *       404:
  *         description: Princess not found
  */
-router.put("/:id", princesstController.updatePrincess);
+router.put("/:id", validateUpdatePrincess, princesstController.updatePrincess);
 
-// DELETE a contact
+// DELETE a princess by ID
 /**
  * @swagger
  * /princess/{id}:
  *   delete:
  *     summary: Delete a princess by ID
+ *     tags: [Princess]
  *     parameters:
  *       - in: path
  *         name: id

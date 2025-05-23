@@ -2,12 +2,12 @@ const validator = require("../helpers/validator");
 
 const validateUpdatePrincess = (req, res, next) => {
   const rules = {
-    name: "string",
-    movie: "string",
-    yearReleased: "integer|min:1900|max:2025",
-    kingdom: "string",
-    mainColor: "string",
-    rating: "integer|min:1|max:5"
+    name: "required|string",
+    movie: "required|string",
+    yearReleased: "required|integer|min:1900|max:2025",
+    kingdom: "required|string",
+    mainColor: "required|string",
+    rating: "required|integer|min:1|max:5"
   };
 
   validator(req.body, rules, {}, (err, status) => {

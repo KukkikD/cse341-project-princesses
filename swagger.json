@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Princesses API",
-    "description": "API documentation for the Princess project",
+    "title": "Princesses and Castles API",
+    "description": "API documentation for the Princess and Castle project",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -29,68 +29,39 @@
             "required": true,
             "schema": {
               "type": "object",
+              "required": ["name", "movie", "yearReleased", "rating"],
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Rapunzel"
-                },
-                "kingdom": {
-                  "type": "string",
-                  "example": "Corona"
-                },
-                "age": {
-                  "type": "integer",
-                  "example": 18
-                },
-                "power": {
-                  "type": "string",
-                  "example": "Healing hair"
-                }
+                "name": { "type": "string", "example": "Rapunzel" },
+                "movie": { "type": "string", "example": "Tangled" },
+                "yearReleased": { "type": "integer", "example": 2010 },
+                "kingdom": { "type": "string", "example": "Corona" },
+                "mainColor": { "type": "string", "example": "Purple" },
+                "rating": { "type": "integer", "minimum": 1, "maximum": 5, "example": 4 }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Princess created successfully"
-          },
-          "500": {
-            "description": "Failed to create Princess"
-          }
+          "201": { "description": "Princess created successfully" },
+          "500": { "description": "Failed to create Princess" }
         }
       }
     },
     "/princess/{id}": {
       "get": {
         "summary": "Get a princess by ID",
-        "description": "Retrieve detailed information about a specific princess",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "200": {
-            "description": "Princess details retrieved successfully"
-          },
-          "404": {
-            "description": "Princess not found"
-          }
+          "200": { "description": "Princess details retrieved successfully" },
+          "404": { "description": "Princess not found" }
         }
       },
       "put": {
-        "summary": "Update a princess by ID",
-        "description": "Modify the details of an existing princess",
+        "summary": "Update a princess",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "body",
             "in": "body",
@@ -98,56 +69,119 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Rapunzel"
-                },
-                "kingdom": {
-                  "type": "string",
-                  "example": "Corona"
-                },
-                "age": {
-                  "type": "integer",
-                  "example": 19
-                },
-                "power": {
-                  "type": "string",
-                  "example": "Healing hair"
-                }
+                "name": { "type": "string" },
+                "movie": { "type": "string" },
+                "yearReleased": { "type": "integer" },
+                "kingdom": { "type": "string" },
+                "mainColor": { "type": "string" },
+                "rating": { "type": "integer", "minimum": 1, "maximum": 5 }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Princess updated successfully"
-          },
-          "404": {
-            "description": "Princess not found"
-          },
-          "500": {
-            "description": "Failed to update Princess"
-          }
+          "200": { "description": "Princess updated successfully" },
+          "400": { "description": "Validation failed" },
+          "404": { "description": "Princess not found" }
         }
       },
       "delete": {
-        "summary": "Delete a princess by ID",
-        "description": "Remove a princess from the database",
+        "summary": "Delete a princess",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "204": { "description": "Princess deleted successfully (No Content)" },
+          "404": { "description": "Princess not found" }
+        }
+      }
+    },
+    "/castle/": {
+      "get": {
+        "summary": "Get all castles",
+        "responses": {
+          "200": {
+            "description": "List of castles retrieved successfully"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new castle",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "example": "Voyager’s Keep" },
+                "location": { "type": "string", "example": "Motunui Island" },
+                "builtYear": { "type": "integer", "example": 1500 },
+                "hasMoat": { "type": "boolean", "example": false },
+                "rooms": { "type": "integer", "example": 35 },
+                "legend": { "type": "string", "example": "Heart of Te Fiti once stored here." },
+                "princessResident": { "type": "string", "example": "6653fd21a01b6ae6c2944131" }
+              }
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content"
+          "201": {
+            "description": "Castle created successfully"
           },
-          "404": {
-            "description": "Princess not found"
+          "500": {
+            "description": "Failed to create Castle"
           }
+        }
+      }
+    },
+    "/castle/{id}": {
+      "get": {
+        "summary": "Get a castle by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Castle details retrieved successfully" },
+          "404": { "description": "Castle not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a castle",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "location": { "type": "string" },
+                "builtYear": { "type": "integer" },
+                "hasMoat": { "type": "boolean" },
+                "rooms": { "type": "integer" },
+                "legend": { "type": "string" },
+                "princessResident": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Castle updated successfully" },
+          "404": { "description": "Castle not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a castle",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "204": {"description": "Castle deleted successfully (No Content)"},
+          "404": { "description": "Castle not found" }
         }
       }
     }

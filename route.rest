@@ -1,25 +1,26 @@
 //LOCAL Host
-
+//Princess
 ### Get all 
 GET http://localhost:8083/princess
 
 ### Get Princess by ID
 GET http://localhost:8083/princess/682d9555679e09d3f9c0f8c3
 
+
 ### Add new Princess
 POST http://localhost:8083/princess HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Elsa",
+  "name": ,
   "movie": "Frozen",
-  "yearReleased": 2013,
+  "yearReleased": 2025,
   "kingdom": "Arendelle",
   "mainColor": "Blue",
   "rating": 3
 }
 
-### PUT - Update contact by ID
+### PUT - Update princess by ID
 PUT http://localhost:8083/princess/682ef2ce4b1fcade62d8e4e3
 Content-Type: application/json
 
@@ -34,3 +35,44 @@ Content-Type: application/json
 
 ### DELETE - Delete a princeese by ID
 DELETE http://localhost:8083/princess/682ef2ce4b1fcade62d8e4e3
+
+//LOCAL Host
+//Castle
+### Get all 
+GET http://localhost:8083/castle
+
+### Get castle by ID 
+GET http://localhost:8083/castle/682ff9e1e0981f9384dcaf6c
+
+### Add new Castle
+POST http://localhost:8083/castle HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Crystal Palace",
+    "location": "Northern Mountains",
+    "builtYear": 1502,
+    "hasMoat": false,
+    "rooms": 300,
+    "legend": "Crystals on the tower sing during full moon.",
+    "princessResident": "682ff3142afd879b8c6399e1"
+  }
+
+### PUT - Update castle by ID
+PUT http://localhost:8083/castle/68301ccc643d5fcb46c93bcd
+Content-Type: application/json
+
+{
+    "Crystal Palace": "Crystal Palace",
+    "location": "Northern Mountains",
+    "builtYear": 1990,
+    "hasMoat": false,
+    "rooms": 80,
+    "legend": "Crystals on the tower sing during full moon.",
+    "princessResident": "682ff3142afd879b8c6399e1"
+  }
+
+### Delete castle by ID
+DELETE http://localhost:8083/castle/68301ccc643d5fcb46c93bcd
+
+// Deploy => render.com

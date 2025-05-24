@@ -20,7 +20,7 @@ router.get("/", castleController.getAll);
 // GET a single castle by ID
 /**
  * @swagger
- * /api/castles/{id}:
+ * /api/castle/{id}:
  *   get:
  *     summary: Get a single castle by ID
  *     tags: [Castle]
@@ -46,7 +46,7 @@ router.get("/:id", castleController.getSingle);
 // POST a new castle
 /**
  * @swagger
- * /api/castles:
+ * /api/castle:
  *   post:
  *     summary: Create a new castle
  *     tags: [Castle]
@@ -64,7 +64,7 @@ router.get("/:id", castleController.getSingle);
  *               - rooms
  *               - legend
  *               - princessResident
- *              properties:
+ *             properties:
  *               name:
  *                 type: string
  *               location:
@@ -90,10 +90,17 @@ router.post("/", validateCreateCastle, castleController.createCastle);
 // PUT update a castle
 /**
  * @swagger
- * /api/castles/{id}:
+ * /api/castle/{id}:
  *   put:
  *     summary: Update a castle by ID
  *     tags: [Castle]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The castle ID
  *     requestBody:
  *       required: true
  *       content:
@@ -108,7 +115,7 @@ router.post("/", validateCreateCastle, castleController.createCastle);
  *               - rooms
  *               - legend
  *               - princessResident
- *              properties:
+ *             properties:
  *               name:
  *                 type: string
  *               location:
@@ -136,7 +143,7 @@ router.put("/:id", validateUpdateCastle, castleController.updateCastle);
 // DELETE a castle
 /**
  * @swagger
- * /api/castles/{id}:
+ * /api/castle/{id}:
  *   delete:
  *     summary: Delete a castle by ID
  *     tags: [Castle]

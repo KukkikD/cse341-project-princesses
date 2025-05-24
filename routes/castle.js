@@ -77,7 +77,7 @@ router.get("/:id", castleController.getSingle);
  *                 type: integer
  *               legend:
  *                 type: string
- *               princessResident
+ *               princessResident:
  *                 type: string 
  *     responses:
  *       201:
@@ -121,7 +121,7 @@ router.post("/", validateCreateCastle, castleController.createCastle);
  *                 type: integer
  *               legend:
  *                 type: string
- *               princessResident
+ *               princessResident:
  *                 type: string
  *     responses:
  *       200:

@@ -55,7 +55,30 @@ router.get("/:id", castleController.getSingle);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Castle'
+ *             type: object
+ *             required:
+ *               - name
+ *               - location
+ *               - builtYear
+ *               - hasMoat
+ *               - rooms
+ *               - legend
+ *               - princessResident
+ *              properties:
+ *               name:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *               builtYear:
+ *                 type: integer
+ *               hasMoat:
+ *                 type: boolean
+ *               rooms:
+ *                 type: integer
+ *               legend:
+ *                 type: string
+ *               princessResident
+ *                 type: string 
  *     responses:
  *       201:
  *         description: Castle created successfully
@@ -71,19 +94,35 @@ router.post("/", validateCreateCastle, castleController.createCastle);
  *   put:
  *     summary: Update a castle by ID
  *     tags: [Castle]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The castle ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Castle'
+ *             type: object
+ *             required:
+ *               - name
+ *               - location
+ *               - builtYear
+ *               - hasMoat
+ *               - rooms
+ *               - legend
+ *               - princessResident
+ *              properties:
+ *               name:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *               builtYear:
+ *                 type: integer
+ *               hasMoat:
+ *                 type: boolean
+ *               rooms:
+ *                 type: integer
+ *               legend:
+ *                 type: string
+ *               princessResident
+ *                 type: string
  *     responses:
  *       200:
  *         description: Castle updated successfully

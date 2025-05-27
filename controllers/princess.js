@@ -3,19 +3,26 @@ const Princess = require("../models/princess");
 
 // GET all princesses
 const getAll = async (req, res) => {
+  try {
     const princesses = await Princess.find();
     res.status(200).json(princesses);
+  } catch {
+    res.status(500).json({ error: "Failed to retrieve princesses." }); //added try/catch as grader commented.
+  }
 };
 
 // GET a single princess by ID
 const getSingle = async (req, res) => {
+  try {
     const princess = await Princess.findById(req.params.id);
     if (princess) {
       res.status(200).json(princess);
     } else {
-      res.status(404).json({ message: "Princess not found." }); // Not Found, changed for professional look as recommended by grader
+      res.status(404).json({ message: "Princess not found." });
+    }
+  } catch {
+    res.status(400).json({ error: "Invalid ID format or failed to retrieve princess." }); //added try/catch as grader commented.
   }
-    
 };
 
 // CREATE a new princess

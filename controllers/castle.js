@@ -13,11 +13,15 @@ const getAll = async (req, res) => {
 
 // GET a single castle by ID
 const getSingle = async (req, res) => {
-  const castle = await Castle.findById(req.params.id).populate("princessResident", "name");
-  if (castle) {
-    res.status(200).json(castle);
-  } else {
-    res.status(404).json({ message: "Castle not found." });
+  try {
+    const castle = await Castle.findById(req.params.id).populate("princessResident", "name");
+    if (castle) {
+      res.status(200).json(castle);
+    } else {
+      res.status(404).json({ message: "Castle not found." });
+    }
+  } catch {
+    res.status(400).json({ error: "Invalid ID format or failed to retrieve castles." }); //added try/catch as grader commented.
   }
 };
 

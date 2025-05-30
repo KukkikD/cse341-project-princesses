@@ -5,21 +5,58 @@
     "description": "API documentation for the Princess and Castle project",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "localhost:8083",
   "basePath": "/",
   "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Princess",
+      "description": "Operations related to Princesses"
+    },
+    {
+      "name": "Castle",
+      "description": "Operations related to Castles"
+    }
+  ],
+  "securityDefinitions": {
+    "githubOAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "read:user": "read user profile info",
+        "user:email": "read user email",
+        "read:princess": "read your princess info",
+        "write:princess": "modify princess info (create, update, delete)",
+        "read:castle": "read your castle info",
+        "write:castle": "modify castle info (create, update, delete)"
+      }
+    }
+  },
+  "security": [
+    {
+      "githubOAuth": []
+    }
+  ],
   "paths": {
     "/princess/": {
       "get": {
+        "tags": ["Princess"],
         "summary": "Get all princesses",
         "description": "Retrieve a list of all princesses",
         "responses": {
           "200": {
             "description": "List of princesses retrieved successfully"
           }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       },
       "post": {
+        "tags": ["Princess"],
         "summary": "Create a new princess",
         "description": "Add a new princess to the collection",
         "parameters": [
@@ -44,11 +81,17 @@
         "responses": {
           "201": { "description": "Princess created successfully" },
           "500": { "description": "Failed to create Princess" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       }
     },
     "/princess/{id}": {
       "get": {
+        "tags": ["Princess"],
         "summary": "Get a princess by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
@@ -56,9 +99,15 @@
         "responses": {
           "200": { "description": "Princess details retrieved successfully" },
           "404": { "description": "Princess not found" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       },
       "put": {
+        "tags": ["Princess"],
         "summary": "Update a princess",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
@@ -83,9 +132,15 @@
           "200": { "description": "Princess updated successfully" },
           "400": { "description": "Validation failed" },
           "404": { "description": "Princess not found" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       },
       "delete": {
+        "tags": ["Princess"],
         "summary": "Delete a princess",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
@@ -93,11 +148,17 @@
         "responses": {
           "204": { "description": "Princess deleted successfully (No Content)" },
           "404": { "description": "Princess not found" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       }
     },
     "/castle/": {
       "get": {
+        "tags": ["Castle"],
         "summary": "Get all castles",
         "responses": {
           "200": {
@@ -106,6 +167,7 @@
         }
       },
       "post": {
+        "tags": ["Castle"],
         "summary": "Create a new castle",
         "parameters": [
           {
@@ -127,17 +189,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Castle created successfully"
-          },
-          "500": {
-            "description": "Failed to create Castle"
-          }
+          "201": { "description": "Castle created successfully" },
+          "500": { "description": "Failed to create Castle" }
         }
       }
     },
     "/castle/{id}": {
       "get": {
+        "tags": ["Castle"],
         "summary": "Get a castle by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
@@ -148,6 +207,7 @@
         }
       },
       "put": {
+        "tags": ["Castle"],
         "summary": "Update a castle",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
@@ -175,14 +235,20 @@
         }
       },
       "delete": {
+        "tags": ["Castle"],
         "summary": "Delete a castle",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "204": {"description": "Castle deleted successfully (No Content)"},
+          "204": { "description": "Castle deleted successfully (No Content)" },
           "404": { "description": "Castle not found" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       }
     }
   }

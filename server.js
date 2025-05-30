@@ -2,20 +2,41 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { connectToDb } = require("./db/connection");
 const princessRoutes = require("./routes");
-//const swaggerUi = require("swagger-ui-express"); // eslint-disable-line no-unused-vars
-// const swaggerDocument = require('./swagger.json'); // for swagger static
+const session = require("express-session");
+const passport = require("passport");
+require("./auth/github"); // GitHub OAuth setup
+const swaggerUi = require("swagger-ui-express"); // eslint-disable-line no-unused-vars
+const swaggerDocument = require("./swagger.json"); // for swagger static
 const swaggerRoutes = require("./routes/swagger"); // for swagger dynamic
-
 const jsonErrorHandler = require("./middleware/jsonErrorHandler");
 
 const app = express();
 
+/* Session + Passport */
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 /* Swagger route */
 app.use("/", swaggerRoutes); //swagger dynamic
-//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)) // swagger static
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument)) // swagger static
 
 /* middleware */
+// middleware check that loggged in 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.status(401).json({ message: "Unauthorized" });
+}
+
+app.get("/protected", ensureAuthenticated, (req, res) => {
+  res.json({ message: "You are logged in with GitHub!", user: req.user });
+});
+
 app.use(bodyParser.json());
 
 /*  catch body parser error */

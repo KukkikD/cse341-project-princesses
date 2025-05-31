@@ -5,7 +5,7 @@ const User = require("../models/user"); // must have "user" file
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: `${process.env.BASE_URL}/auth/github/callback`
+  callbackURL: "https://cse341-project-princesses.onrender.com/auth/github/callback"
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await User.findOne({ githubId: profile.id });

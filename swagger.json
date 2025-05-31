@@ -5,7 +5,7 @@
     "description": "API documentation for the Princess and Castle project",
     "version": "1.0.0"
   },
-  "host": "localhost:8083",
+  "host": "https://cse341-project-princesses.onrender.com",
   "basePath": "/",
   "schemes": ["http"],
   "tags": [
@@ -48,12 +48,7 @@
           "200": {
             "description": "List of princesses retrieved successfully"
           }
-        },
-        "security": [
-          {
-            "githubOAuth": []
-          }
-        ]
+        }
       },
       "post": {
         "tags": ["Princess"],
@@ -73,7 +68,7 @@
                 "yearReleased": { "type": "integer", "example": 2010 },
                 "kingdom": { "type": "string", "example": "Corona" },
                 "mainColor": { "type": "string", "example": "Purple" },
-                "rating": { "type": "integer", "minimum": 1, "maximum": 5, "example": 4 }
+                "rating": { "type": "integer", "example": 4 }
               }
             }
           }
@@ -99,12 +94,7 @@
         "responses": {
           "200": { "description": "Princess details retrieved successfully" },
           "404": { "description": "Princess not found" }
-        },
-        "security": [
-          {
-            "githubOAuth": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": ["Princess"],
@@ -191,7 +181,12 @@
         "responses": {
           "201": { "description": "Castle created successfully" },
           "500": { "description": "Failed to create Castle" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       }
     },
     "/castle/{id}": {
@@ -232,7 +227,12 @@
         "responses": {
           "200": { "description": "Castle updated successfully" },
           "404": { "description": "Castle not found" }
-        }
+        },
+        "security": [
+          {
+            "githubOAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": ["Castle"],

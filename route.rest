@@ -30,7 +30,7 @@ Content-Type: application/json
   "yearReleased": 2013,
   "kingdom": "Arendelle",
   "mainColor": "Blue",
-  "rating": 1
+  "rating": 0
 }
 
 ### DELETE - Delete a princeese by ID

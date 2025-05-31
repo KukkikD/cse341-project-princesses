@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { ensureAuthenticated } = require("../middleware/authentication");
+const ensureAuthenticated  = require("../middleware/authentication");
 
 // Main app routes
 router.use("/princess", require("./princess"));
@@ -16,15 +16,18 @@ router.get("/auth/github/callback",
     res.redirect("/protected");
   });
 
-router.get("/logout", (req, res) => {
-  req.logout(() => {
-    res.redirect("/");
+router.get("/logout", (req, res, next) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    req.session.destroy(() => { // Delete session from server
+      res.send("🔓 You have logged out.");
+    });
   });
 });
 
 // Protected test route
 router.get("/protected", ensureAuthenticated, (req, res) => {
-  res.json({ message: "You are logged in with GitHub!", user: req.user });
+  res.send("🔐 You are logged in with GitHub!" ); // if api communicate with frontend change to res.json
 });
 
 module.exports = router;

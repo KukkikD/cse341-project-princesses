@@ -7,7 +7,7 @@
   },
   "host": "cse341-project-princesses.onrender.com",
   "basePath": "/",
-  "schemes": ["httpห"],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "Princess",

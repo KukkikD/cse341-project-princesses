@@ -1,6 +1,7 @@
 const validator = require("../helpers/validator");
 
 const validateUpdatePrincess = (req, res, next) => {
+  //console.log("validateUpdatePrincess middleware is running"); 
   const rules = {
     name: "required|string",
     movie: "required|string",

@@ -7,7 +7,7 @@ const princessSchema = new mongoose.Schema({
   yearReleased: { type: Number, required: true },
   kingdom: { type: String },
   mainColor: { type: String },
-  rating: {type: Number, minimum: 1, maximum: 5}, 
+  rating: { type: Number, min: 1, max: 5 }, 
   },
   {
     versionKey: false // close __V
